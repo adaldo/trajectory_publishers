@@ -16,6 +16,7 @@ rp.init_node('plotter')
 LOCK = thd.Lock()
 saved_point = np.zeros(3)
 
+
 plt.ion()
 plt.figure()
 ax = plt.gca(projection='3d')

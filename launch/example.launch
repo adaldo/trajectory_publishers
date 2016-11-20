@@ -1,11 +1,12 @@
 <launch>
 
   <arg name='type'/>
+  <rosparam file='$(find trajectory_publishers)/params/$(arg type).yaml'/>
 
   <node
-    name='$(arg trajectory_type)'
+    name='$(arg type)'
     pkg='trajectory_publishers'
-    type='$(arg trajectory_type).py'/>
+    type='$(arg type).py'/>
 
   <node
     name='plotter'

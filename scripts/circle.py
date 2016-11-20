@@ -10,6 +10,7 @@ import abstract as abt
 
 class Circle(abt.Abstract):
 
+
     def compute_point(self, time):
         point = gms.Point()
         arr = np.zeros(3)
@@ -17,6 +18,7 @@ class Circle(abt.Abstract):
         arr[1] = self.__RADIUS*np.sin(self.__ANGVEL*time)
         arr[2] = 0.0
         arr = self.__ROTATION.dot(arr)
+        arr += self.__CENTER
         point.x = arr[0]
         point.y = arr[1]
         point.z = arr[2]
@@ -25,10 +27,13 @@ class Circle(abt.Abstract):
 
     def __init__(self,
             frequency = rp.get_param('frequency', 3e1),
+            center = np.array(
+                rp.get_param('center', np.zeros(3).tolist())),
             radius = rp.get_param('radius', 1.0),
             rotation = np.array(
                 rp.get_param('rotation', np.eye(3).tolist())),
             angvel = rp.get_param('angvel', 1.0)):
+        self.__CENTER = center
         self.__RADIUS = radius
         self.__ROTATION = rotation
         self.__ANGVEL = angvel
