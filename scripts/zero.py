@@ -2,10 +2,10 @@
 
 import rospy as rp
 import geometry_msgs.msg as gms
-import abstract_tp as atp
+import abstract as abt
 
 
-class ZeroTP(atp.AbstractTP):
+class Zero(atp.Abstract):
 
     def compute_point(self, time):
         #raise NotImplementedError()
@@ -14,4 +14,4 @@ class ZeroTP(atp.AbstractTP):
 
 
 if __name__ == '__main__':
-    tp = ZeroTP()
+    tp = Zero()

@@ -4,7 +4,7 @@ import rospy as rp
 import geometry_msgs.msg as gms
 
 
-class AbstractTP:
+class Abstract:
 
 
     def compute_point(self, time):
@@ -13,10 +13,10 @@ class AbstractTP:
 
 
     def __init__(self,
-            frequency=rp.get_param('frequency', 1e1)):
-        rp.init_node('abstract_tp')
+            frequency=rp.get_param('frequency', 3e1)):
+        rp.init_node('abstract')
         pub = rp.Publisher(
-            name='trajectory_point',
+            name='point',
             data_class=gms.Point,
             queue_size=10)
         RATE = rp.Rate(frequency)

@@ -1,0 +1,15 @@
+<launch>
+
+  <arg name='type'/>
+
+  <node
+    name='$(arg trajectory_type)'
+    pkg='trajectory_publishers'
+    type='$(arg trajectory_type).py'/>
+
+  <node
+    name='plotter'
+    pkg='trajectory_publishers'
+    type='plotter.py'/>
+
+</launch>
