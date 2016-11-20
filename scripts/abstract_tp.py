@@ -6,16 +6,14 @@ import geometry_msgs.msg as gms
 
 class AbstractTP:
 
-    @classmethod
+
     def compute_point(self, time):
         raise NotImplementedError()
         #return gms.Point()
 
 
-    def __init__(
-            self,
-            frequency=rp.get_param('frequency',1e1)
-            ):
+    def __init__(self,
+            frequency=rp.get_param('frequency', 1e1)):
         rp.init_node('abstract_tp')
         pub = rp.Publisher(
             name='trajectory_point',
