@@ -1,4 +1,4 @@
-# `trajectory_publishers`
+# `trajpub`
 
 A collection of ROS nodes that publish messages of the type `geometry_msgs/Point`.
 
