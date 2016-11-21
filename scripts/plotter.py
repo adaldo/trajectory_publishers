@@ -15,7 +15,7 @@ rp.init_node('plotter')
 
 LOCK = thd.Lock()
 saved_point = np.zeros(3)
-
+NUM_POINTS = rp.get_param('num_points', 30)
 
 plt.ion()
 plt.figure()
@@ -29,7 +29,9 @@ ZMAX = rp.get_param('zmax', 1.0)
 ax.set_xlim((XMIN,XMAX))
 ax.set_ylim((YMIN,YMAX))
 ax.set_zlim((ZMIN,ZMAX))
-artist = ax.scatter(*(np.zeros(3).tolist()))
+
+artists = []
+artists.append(ax.scatter(*(np.zeros(3).tolist())))
 
 
 def point_callback(msg):
@@ -45,8 +47,9 @@ rp.Subscriber('point', gms.Point, point_callback)
 RATE = rp.Rate(3e1)
 while not rp.is_shutdown():
     LOCK.acquire()
-    artist.remove()
-    artist = ax.scatter(*(saved_point.tolist()))
+    if len(artists) == NUM_POINTS:
+        artists.pop(0).remove()
+    artists.append(ax.scatter(*(saved_point.tolist())))
     plt.draw()
     LOCK.release()
     RATE.sleep()
