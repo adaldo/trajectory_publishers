@@ -21,13 +21,15 @@ class Constant(abt.Abstract):
             x=rp.get_param('x', 0.0),
             y=rp.get_param('y', 0.0),
             z=rp.get_param('z', 0.0)):
+        abt.Abstract.__init__(self, frequency)
         self.__x = x
         self.__y = y
         self.__z = z
-        abt.Abstract.__init__(self, frequency)
 
 
 
 
 if __name__ == '__main__':
+    rospy.init_node('constant')
     tp = Constant()
+    tp.start()

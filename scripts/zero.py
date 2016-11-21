@@ -14,4 +14,7 @@ class Zero(atp.Abstract):
 
 
 if __name__ == '__main__':
+    rp.init_node('zero')
     tp = Zero()
+    tp.start()
+    

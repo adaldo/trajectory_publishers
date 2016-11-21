@@ -2,6 +2,7 @@
 
   <arg name='type'/>
   <rosparam file='$(find trajpub)/params/$(arg type).yaml'/>
+  <rosparam file='$(find trajpub)/params/plotter.yaml'/>
 
   <node
     name='$(arg type)'

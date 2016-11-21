@@ -32,14 +32,16 @@ class Circle(abt.Abstract):
             radius = rp.get_param('radius', 1.0),
             rotation = np.array(
                 rp.get_param('rotation', np.eye(3).tolist())),
-            angvel = rp.get_param('angvel', 1.0)):
+            speed = rp.get_param('speed', 1.0)):
+        abt.Abstract.__init__(self, frequency)
         self.__CENTER = center
         self.__RADIUS = radius
         self.__ROTATION = rotation
-        self.__ANGVEL = angvel
-        abt.Abstract.__init__(self, frequency)
+        self.__ANGVEL = speed/radius
 
 
 
 if __name__ == '__main__':
+    rp.init_node('circle')
     tp = Circle()
+    tp.start()
