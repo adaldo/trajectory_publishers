@@ -14,4 +14,9 @@
     pkg='trajpub'
     type='plotter.py'/>
 
+  <node
+    name='reconfig'
+    pkg='rqt_reconfigure'
+    type='rqt_reconfigure'/>
+
 </launch>
