@@ -9,6 +9,8 @@ import rospy as rp
 import geometry_msgs.msg as gms
 
 import threading as thd
+import dynamic_reconfigure.server as drs
+import trajpub.cfg.PlotterConfig as pc
 
 
 rp.init_node('plotter')
@@ -34,6 +36,21 @@ artists = []
 artists.append(ax.scatter(*(np.zeros(3).tolist())))
 
 
+def reconfig_callback(config, level):
+    XMIN = config["xmin"]
+    XMAX = config["xmax"]
+    YMIN = config["ymin"]
+    YMAX = config["ymax"]
+    ZMIN = config["zmin"]
+    ZMAX = config["zmax"]
+    LOCK.acquire()
+    ax.set_xlim((XMIN,XMAX))
+    ax.set_ylim((YMIN,YMAX))
+    ax.set_zlim((ZMIN,ZMAX))
+    LOCK.release()
+    return config
+
+
 def point_callback(msg):
     global saved_point
     LOCK.acquire()
@@ -43,6 +60,7 @@ def point_callback(msg):
     LOCK.release()
 
 rp.Subscriber('point', gms.Point, point_callback)
+drs.Server(pc, reconfig_callback)
 
 RATE = rp.Rate(3e1)
 while not rp.is_shutdown():
