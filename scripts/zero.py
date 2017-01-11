@@ -5,7 +5,7 @@ import geometry_msgs.msg as gms
 import abstract as abt
 
 
-class Zero(atp.Abstract):
+class Zero(abt.Abstract):
 
     def compute_point(self, time):
         #raise NotImplementedError()
